@@ -1,0 +1,5 @@
+com\xing\controller\BookController.class
+com\xing\service\BookService.class
+com\xing\dao\BookMapper.class
+com\xing\pojo\Books.class
+com\xing\service\impl\BookServiceImpl.class

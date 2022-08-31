@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <import resource="springmvc-config.xml"/>
+<!--扫描数据源db.properties-->
+    <context:property-placeholder location="classpath:db.properties"/>
+<!--    <context:property-placeholder location="db.properties"/>   这种是会报错的，必须滴啊classpath-->
+<!--配置c3p0数据源-->
+<!--    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+<!--        <property name="jdbcUrl" value="${jdbc.url}"/>-->
+<!--    </bean>-->
+    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="maxPoolSize" value="${jdbc.maxTotal}"/>
+        <property name="maxIdleTime" value="${jdbc.maxIdle}"/>
+        <property name="initialPoolSize" value="${jdbc.initialSize}"/>
+    </bean>
+
+<!--    配置SQLSessionFactory工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!--配置mapper扫描器,    同时也把BookMapper接口注入到bean中了，避免了将所有mapper接口一个一个的注入到bean中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xing.dao"/>
+    </bean>
+
+
+
+    <context:component-scan base-package="com.xing.service"/>
+
+
+
+</beans>
