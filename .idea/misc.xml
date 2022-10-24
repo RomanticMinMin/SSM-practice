@@ -7,6 +7,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/project-02-ssm/pom.xml" />
+        <option value="$PROJECT_DIR$/BookManage/pom.xml" />
       </list>
     </option>
   </component>

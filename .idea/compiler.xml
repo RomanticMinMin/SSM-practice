@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="project-02-ssm" />
+        <module name="BookManage" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BookManage" target="8" />
       <module name="project-02-ssm" target="8" />
     </bytecodeTargetLevel>
   </component>
